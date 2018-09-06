@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {EmployeeService} from '../employee.service';
+import { Employee, EmployeeService } from '../employee.service';
+import { assertDataInRangeInternal } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'employee-new',
@@ -7,20 +8,24 @@ import {EmployeeService} from '../employee.service';
   styleUrls: ['./employee-new.component.css']
 })
 export class EmployeeNewComponent implements OnInit {
-  name = "";
-  salary = 0;
-  bonus = 0;
+  employee: Employee = {
+    name: "",
+    salary: 0,
+    bonus: 0
+  }
 
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService) { 
+
+  }
 
   ngOnInit() {
+
   }
 
-  addEmployee(event) {
-    const bonus = this.salary >= 1000? 0 : this.bonus;
-    this.employeeService.employees.push({ name: this.name, salary: this.salary, bonus: this.bonus });
-    console.log(this.employeeService.employees);
-  }
+    addEmployee(event){
+      const copy = Object.assign( {}, this.employee)
+      this.employeeService.addEmployee(copy);
+    }
 
 }
