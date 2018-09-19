@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 
-interface Employee {
+export interface Employee {
   name:string;
   salary: number;
   bonus: number;
@@ -19,7 +19,7 @@ export class EmployeeService {
   constructor() { }
 
   addEmployee( employee: Employee) {
-    const bonus = employee.salary >= 1000? 0 : employee.bonus;
+    employee.bonus = employee.salary >= 1000? 0 : employee.bonus;
     this.employees.push(employee);
   }
 
